@@ -113,3 +113,33 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.flex-row{    
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-flow: row nowrap    
+}
+
+.flex-column{    
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-flow: column nowrap    
+}
+
+.red{
+    background-color: #ff000052;
+}
+
+.yellow{
+    background-color: #ffff005c;
+}
+
+.green{
+    background-color: #00801261;
+}

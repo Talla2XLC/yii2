@@ -1,0 +1,48 @@
+.task-container {
+    border: 1px solid black;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    margin: 2rem 0;
+    padding: 1rem;
+    cursor: pointer;
+    color: black;
+}
+.task-container:hover{
+    text-decoration: none;
+    filter: brightness(85%);
+}
+
+.task-info{
+    width: 50%;
+}
+
+.task-info-tag{
+    margin-right: 1rem;
+    justify-content: space-around;
+}
+
+.task-info-value{
+    margin-right: 1rem;
+    justify-content: space-around;
+}
+
+.task-desc{
+    width: 50%;
+}
+
+.task-desc > span {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.big-task{
+    height: 50vh;
+    padding: 2rem;
+    font-size: 3rem;
+}
+
+.title-top{
+    justify-content: space-between;
+    -ms-align-items: center;
+    align-items: center;
+}
