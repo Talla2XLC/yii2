@@ -4,10 +4,14 @@
     box-sizing: border-box;
     margin: 2rem 0;
     padding: 1rem;
-    cursor: pointer;
     color: black;
 }
-.task-container:hover{
+
+.link{
+    cursor: pointer;
+}
+
+.link:hover{
     text-decoration: none;
     filter: brightness(85%);
 }

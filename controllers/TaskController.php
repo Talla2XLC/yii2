@@ -1,25 +1,27 @@
 <?php
 
 namespace app\controllers;
-use app\models\AllTasks;
+use app\models\TasksCollection;
 use yii\web\Controller;
 
 class TaskController extends Controller {
 	public function actionIndex() {
-		$model = new AllTasks();
+		$model = new TasksCollection();
+
+		$allTasks = $model::getAllTasks();
 
 		return $this->render('index', [
 			'title' => 'All Available Tasks',
-			'allTasks' => $model::getAllTasks(),
+			'allTasks' => $allTasks,
 		]);
 	}
 
 	public function actionFull($id) {
-		$model = new AllTasks();
+		$model = new TasksCollection();
 
 		$task = $model::getTask($id);
 
-		return $this->render('fullTask', [
+		return $this->render('full_task', [
 			'title' => 'Task # ' . $id,
 			'task' => $task,
 		]);
