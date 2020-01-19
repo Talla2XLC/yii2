@@ -1,40 +1,27 @@
 <?php
 
 namespace app\controllers;
-use app\models\Lession;
+use app\models\AllTasks;
 use yii\web\Controller;
 
 class TaskController extends Controller {
 	public function actionIndex() {
-		$model = new Lession();
+		$model = new AllTasks();
 
-		//передаём массив с аттрибутами
-		$model->setAttributes([
-			'name' => 'Lession1',
-			'description' => '2123123',
-			'order' => 8,
+		return $this->render('index', [
+			'title' => 'All Available Tasks',
+			'allTasks' => $model::getAllTasks(),
 		]);
-
-		if ($model->validated() === true) {
-			return $this->render('index', [
-				'title' => 'Hello!',
-				'content' => 'Yii2 L1',
-			]);
-		} else {
-			return $this->render('index', [
-				'title' => 'Ошибка',
-				'content' => $model->validated(),
-			]);
-		}
-
-		//renderPartial отображает без layout
-		//либо использовать $this->layout = false;
 	}
 
-	//?r=task/one&id=1
-	public function actionOne($id = 1) {
-		//$id = \Yii::$app->request->get('id');
-		var_dump($id);
-		exit;
+	public function actionFull($id) {
+		$model = new AllTasks();
+
+		$task = $model::getTask($id);
+
+		return $this->render('fullTask', [
+			'title' => 'Task # ' . $id,
+			'task' => $task,
+		]);
 	}
 }
