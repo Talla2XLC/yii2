@@ -8,12 +8,21 @@ class TaskController extends Controller {
 	public function actionIndex() {
 		$model = new TasksCollection();
 
+		$model->setAttributes([
+			'test' => 8,
+		]);
+
 		$allTasks = $model::getAllTasks();
 
-		return $this->render('index', [
-			'title' => 'All Available Tasks',
-			'allTasks' => $allTasks,
-		]);
+		if (!$model->validate()) {
+			$error = $model->getErrors();
+			print_r($error);exit;
+		} else {
+			return $this->render('index', [
+				'title' => 'All Available Tasks',
+				'allTasks' => $allTasks,
+			]);
+		}
 	}
 
 	public function actionFull($id) {
