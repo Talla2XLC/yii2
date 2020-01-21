@@ -5,27 +5,34 @@
 	class="
 		task-container
 		flex-row
-		<?if ($task['priority'] == 'major'): ?>
+		link
+		<?if ($task['status_id'] == 4): ?>
 		<?='red'?>
-		<?elseif ($task['priority'] == 'medium'): ?>
+		<?elseif ($task['status_id'] == 3): ?>
+		<?='grey'?>
+		<?elseif ($task['status_id'] == 2): ?>
 		<?='yellow'?>
-		<?elseif ($task['priority'] == 'minor'): ?>
+		<?elseif ($task['status_id'] == 1): ?>
 		<?='green'?>
 		<?endif;?>
 	">
 		<div class="task-info flex-row">
 			<div class="task-info-tag flex-column">
-			<p>Номер задания:</p>
-			<p>Приоритет:</p>
-			<p>Дата выполнения:</p>
-			<p>Место проведения:</p>
+				<p>Номер задания:</p>
+				<p>Приоритет:</p>
+				<p>Выполнить до:</p>
+				<p>Назначил:</p>
+				<p>Ответственный:</p>
+				<p>Статус:</p>
 			</div>
 
 			<div class="task-info-value flex-column">
-			<p><?=$task['id']?></p>
-			<p><?=$task['priority']?></p>
-			<p><?=$task['date']?></p>
-			<p><?=$task['place']?></p>
+				<p><?=$task['id']?></p>
+				<p><?=$task->priority['name']?></p>
+				<p><?=$task['deadline']?></p>
+				<p><?=$task->creator['name']?></p>
+				<p><?=$task->responsible['name']?></p>
+				<p><?=$task->status['name']?></p>
 			</div>
 		</div>
 		<div class="task-desc flex-column">
