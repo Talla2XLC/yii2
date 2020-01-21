@@ -6,12 +6,11 @@ use app\models\validation\TaskValidator;
 use yii\base\Model;
 
 class TasksCollection extends Model {
-	private static $allTasks;
 	public $test;
 
-	public function __construct() {
+	/*public function __construct() {
 		self::$allTasks = Tasks::find()->all();
-	}
+	}*/
 
 	public function rules() {
 		return [
@@ -20,7 +19,8 @@ class TasksCollection extends Model {
 	}
 
 	public function getAllTasks() {
-		return isset(self::$allTasks) ? self::$allTasks : null;
+		$allTasks = Tasks::find()->all();
+		return isset($allTasks) ? $allTasks : null;
 	}
 
 	public function getTask($id) {

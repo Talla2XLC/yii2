@@ -41,12 +41,14 @@ class User extends \yii\base\BaseObject implements IdentityInterface {
 	 * @return static|null
 	 */
 	public static function findByUsername($username) {
-		$users = self::getAllUsers();
-		foreach ($users as $user) {
-			if (strcasecmp($user['username'], $username) === 0) {
-				return new static($user);
-			}
-		}
+
+		if ($user = Users::findOne(['username' => $username])) {
+			return new static([
+				'id' => $user->id,
+				'username' => $user->username,
+				'password' => $user->password,
+			]);
+		};
 
 		return null;
 	}
