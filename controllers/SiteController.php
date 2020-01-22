@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\ContactForm;
 use app\models\LoginForm;
+use app\models\RegisterForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -77,6 +78,27 @@ class SiteController extends Controller {
 
 		$model->password = '';
 		return $this->render('login', [
+			'model' => $model,
+		]);
+	}
+
+	/**
+	 * Register action.
+	 *
+	 * @return Response|string
+	 */
+	public function actionRegister() {
+		if (!Yii::$app->user->isGuest) {
+			return $this->goHome();
+		}
+
+		$model = new RegisterForm();
+		if ($model->load(Yii::$app->request->post()) && $model->register()) {
+			return $this->render('register_success');
+		}
+
+		$model->password = '';
+		return $this->render('register', [
 			'model' => $model,
 		]);
 	}

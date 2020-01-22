@@ -35,7 +35,7 @@ class UserAdminController extends Controller {
 	public function actionIndex() {
 		$searchModel = new UserSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		$arrUsers = ArrayHelper::map(Users::find()->all(), 'id', 'name');
+		$arrUsers = ArrayHelper::map(Users::find()->all(), 'name', 'name');
 
 		return $this->render('index', [
 			'searchModel' => $searchModel,

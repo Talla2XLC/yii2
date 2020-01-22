@@ -42,14 +42,21 @@ echo Nav::widget([
 		[
 			'label' => 'Task Tracker',
 			'items' => [
-				['label' => 'Список задач', 'url' => ['/task/index']],
+				['label' => 'Список задач', 'url' => ['task/index']],
 				['label' => 'Помощь', 'url' => ['/task/info']],
 			],
 		],
-		['label' => 'About', 'url' => ['/site/about']],
-		['label' => 'Contact', 'url' => ['/site/contact']],
+		[
+			'label' => 'Администрирование',
+			'items' => [
+				['label' => 'Задачи', 'url' => ['/task-admin/']],
+				['label' => 'Пользователи', 'url' => ['/user-admin/']],
+			],
+		],
+		/*['label' => 'About', 'url' => ['/site/about']],
+		['label' => 'Contact', 'url' => ['/site/contact']],*/
 		Yii::$app->user->isGuest ? (
-			['label' => 'Login', 'url' => ['/site/login']]
+			['label' => 'Войти', 'url' => ['/site/login']]
 		) : (
 			'<li>'
 			. Html::beginForm(['/site/logout'], 'post')

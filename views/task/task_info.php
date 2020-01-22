@@ -7,7 +7,7 @@ class="
 	task-container
 	big-task
 	flex-row
-	red
+	bgc-red
 ">
 	<div class="task-info flex-row">
 		<div class="task-info-tag flex-column">
@@ -19,17 +19,18 @@ class="
 			<p>Статус:</p>
 		</div>
 
-		<div class="task-info-value flex-column">
-			<p>137</p>
-			<p>major</p>
-			<p>31.12.2020</p>
-			<p>Master</p>
-			<p>Slave</p>
-			<p>overdue</p>
+		<div class="task-info-value help1 flex-column">
+			<p><- Порядковый номер задачи</p>
+			<p><- Приоритетность задачи от Major - Middle - Minor</p>
+			<p><- Срок выполнения</p>
+			<p><- Пользователь, создавший задачу</p>
+			<p><- Исполнитель задачи</p>
+			<p><- Текущий статус: opened - in progress - closed - overdue</p>
 		</div>
 	</div>
-	<div class="task-desc flex-column">
+	<div class="task-desc help2 flex-column">
+		<span>Название задания</span>
 		<span>Описание: </span>
-		<p><?=$task['description']?></p>
+		<p class="green center">Здесь располагается детальное описание задания</p>
 	</div>
 </div>

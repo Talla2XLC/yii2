@@ -7,16 +7,16 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = 'Login';
+$this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
     <h1><?=Html::encode($this->title)?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+    <p>Пожалуйста, для регистрации заполните следующие поля:</p>
 
     <?php $form = ActiveForm::begin([
-	'id' => 'login-form',
+	'id' => 'register-form',
 	'layout' => 'horizontal',
 	'fieldConfig' => [
 		'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
@@ -28,14 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?=$form->field($model, 'password')->passwordInput()?>
 
-        <?=$form->field($model, 'rememberMe')->checkbox([
-	'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-])?>
+        <?=$form->field($model, 'name')->textInput([
+	'template' => "<div class=\"col-lg-8\">{error}</div>",
+])->label('Имя')?>
 
         <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">
-                <?=Html::submitButton('Войти', ['class' => 'btn btn-lg btn-success', 'name' => 'login-button'])?>
-                <a class="btn btn-lg btn-primary" href="index.php?r=site/register">Зарегистрироваться</a>
+                <?=Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-lg btn-primary', 'name' => 'register-button'])?>
             </div>
         </div>
 

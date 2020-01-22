@@ -14,6 +14,8 @@ class TaskController extends Controller {
 
 		$allTasks = $model::getAllTasks();
 
+		$dataProvider = $model::dataProvider();
+
 		if (!$model->validate()) {
 			$error = $model->getErrors();
 			print_r($error);exit;
@@ -21,6 +23,7 @@ class TaskController extends Controller {
 			return $this->render('index', [
 				'title' => 'All Available Tasks',
 				'allTasks' => $allTasks,
+				'dataProvider' => $dataProvider,
 			]);
 		}
 	}
