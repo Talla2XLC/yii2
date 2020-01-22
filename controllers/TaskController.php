@@ -26,13 +26,17 @@ class TaskController extends Controller {
 	}
 
 	public function actionFull($id) {
-		$model = new TasksCollection();
-
-		$task = $model::getTask($id);
+		$task = TasksCollection::getTask($id);
 
 		return $this->render('full_task', [
 			'title' => 'Task # ' . $id,
 			'task' => $task,
+		]);
+	}
+
+	public function actionInfo() {
+		return $this->render('task_info', [
+			'title' => 'Описание задания',
 		]);
 	}
 }
