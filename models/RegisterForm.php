@@ -16,8 +16,6 @@ class RegisterForm extends Model {
 	public $password;
 	public $name;
 
-	private $_user = false;
-
 	/**
 	 * @return array the validation rules.
 	 */
@@ -33,9 +31,7 @@ class RegisterForm extends Model {
 
 	public function validateUser($attribute, $params) {
 		if (!$this->hasErrors()) {
-			$isAlreadyExist = $this->isUserAlreadyExist();
-
-			if ($isAlreadyExist) {
+			if (Users::find()->where(['username' => $this->username])->exists()) {
 				$this->addError($attribute, 'Такой пользователь уже существует');
 			}
 		}
@@ -46,7 +42,7 @@ class RegisterForm extends Model {
 	 * @return bool whether the user is register in successfully
 	 */
 	public function register() {
-		if ($this->validate() && !$this->isUserAlreadyExist()) {
+		if ($this->validate() && !Users::find()->where(['username' => $this->username])->exists()) {
 			$newUser = new Users([
 				'username' => $this->username,
 				'password' => $this->password,
@@ -54,13 +50,6 @@ class RegisterForm extends Model {
 			]);
 
 			return $newUser->save();
-		}
-		return false;
-	}
-
-	public function isUserAlreadyExist() {
-		if (User::findByUsername($this->username)) {
-			return true;
 		}
 		return false;
 	}

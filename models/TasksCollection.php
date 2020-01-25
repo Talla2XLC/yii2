@@ -29,10 +29,8 @@ class TasksCollection extends Model {
 		return isset($task) ? $task : null;
 	}
 
-	public function dataProvider() {
+	public function getDataProvider() {
 		$query = Tasks::find();
-
-		// add conditions that should always apply here
 
 		return $dataProvider = new ActiveDataProvider([
 			'query' => $query,

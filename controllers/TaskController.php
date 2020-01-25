@@ -12,9 +12,7 @@ class TaskController extends Controller {
 			'test' => 8,
 		]);
 
-		$allTasks = $model::getAllTasks();
-
-		$dataProvider = $model::dataProvider();
+		$dataProvider = $model::getDataProvider();
 
 		if (!$model->validate()) {
 			$error = $model->getErrors();
@@ -22,7 +20,6 @@ class TaskController extends Controller {
 		} else {
 			return $this->render('index', [
 				'title' => 'All Available Tasks',
-				'allTasks' => $allTasks,
 				'dataProvider' => $dataProvider,
 			]);
 		}
@@ -32,7 +29,7 @@ class TaskController extends Controller {
 		$task = TasksCollection::getTask($id);
 
 		return $this->render('full_task', [
-			'title' => 'Task # ' . $id,
+			'title' => 'Task # ',
 			'task' => $task,
 		]);
 	}

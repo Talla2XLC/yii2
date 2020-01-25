@@ -1,5 +1,5 @@
 <div class="title-top flex-row">
-	<h1><?=$title?></h1>
+	<h1><?=$title . $task['id']?></h1>
 	<a class="btn btn-lg btn-info" href="index.php?r=task">Назад</a>
 </div>
 <div
