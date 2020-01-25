@@ -12,7 +12,7 @@ class TaskController extends Controller {
 			'test' => 8,
 		]);
 
-		$allTasks = $model::getAllTasks();
+		$dataProvider = $model::getDataProvider();
 
 		if (!$model->validate()) {
 			$error = $model->getErrors();
@@ -20,19 +20,23 @@ class TaskController extends Controller {
 		} else {
 			return $this->render('index', [
 				'title' => 'All Available Tasks',
-				'allTasks' => $allTasks,
+				'dataProvider' => $dataProvider,
 			]);
 		}
 	}
 
 	public function actionFull($id) {
-		$model = new TasksCollection();
-
-		$task = $model::getTask($id);
+		$task = TasksCollection::getTask($id);
 
 		return $this->render('full_task', [
-			'title' => 'Task # ' . $id,
+			'title' => 'Task # ',
 			'task' => $task,
+		]);
+	}
+
+	public function actionInfo() {
+		return $this->render('task_info', [
+			'title' => 'Описание задания',
 		]);
 	}
 }

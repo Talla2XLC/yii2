@@ -39,4 +39,12 @@ class Users extends \yii\db\ActiveRecord {
 			'password' => 'Password',
 		];
 	}
+
+	public function fields() {
+		return [
+			'id',
+			'username' => 'username',
+			'password',
+		];
+	}
 }

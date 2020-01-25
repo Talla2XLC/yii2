@@ -1,5 +1,5 @@
 <div class="title-top flex-row">
-	<h1><?=$title?></h1>
+	<h1><?=$title . $task['id']?></h1>
 	<a class="btn btn-lg btn-info" href="index.php?r=task">Назад</a>
 </div>
 <div
@@ -8,13 +8,13 @@ class="
 	big-task
 	flex-row
 	<?if ($task['status_id'] == 4): ?>
-	<?='red'?>
+	<?='bgc-red'?>
 	<?elseif ($task['status_id'] == 3): ?>
-	<?='grey'?>
+	<?='bgc-grey'?>
 	<?elseif ($task['status_id'] == 2): ?>
-	<?='yellow'?>
+	<?='bgc-yellow'?>
 	<?elseif ($task['status_id'] == 1): ?>
-	<?='green'?>
+	<?='bgc-green'?>
 	<?endif;?>
 ">
 	<div class="task-info flex-row">
@@ -37,6 +37,7 @@ class="
 		</div>
 	</div>
 	<div class="task-desc flex-column">
+		<span class="text-size3 text-bold"><?=$task['title']?></span>
 		<span>Описание: </span>
 		<p><?=$task['description']?></p>
 	</div>

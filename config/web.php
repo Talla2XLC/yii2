@@ -4,6 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
+	'language' => 'ru',
 	'id' => 'AI_TaskManager',
 	'name' => 'AI Task Manager',
 	'basePath' => dirname(__DIR__),

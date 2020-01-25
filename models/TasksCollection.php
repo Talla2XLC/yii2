@@ -4,6 +4,7 @@ namespace app\models;
 use app\models\tables\Tasks;
 use app\models\validation\TaskValidator;
 use yii\base\Model;
+use yii\data\ActiveDataProvider;
 
 class TasksCollection extends Model {
 	public $test;
@@ -26,5 +27,13 @@ class TasksCollection extends Model {
 	public function getTask($id) {
 		$task = Tasks::findOne(['id' => $id]);
 		return isset($task) ? $task : null;
+	}
+
+	public function getDataProvider() {
+		$query = Tasks::find();
+
+		return $dataProvider = new ActiveDataProvider([
+			'query' => $query,
+		]);
 	}
 }
