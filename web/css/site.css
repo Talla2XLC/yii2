@@ -132,6 +132,10 @@ a.desc:after {
     flex-flow: column nowrap    
 }
 
+.jc-c{
+    justify-content: center;
+}
+
 /*backgrount-style section*/
 .bgc-red{
     background-color: #ff000052;

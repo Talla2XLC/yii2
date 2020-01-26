@@ -26,11 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?=$form->field($model, 'username')->textInput(['autofocus' => true])?>
 
+        <?=$form->field($model, 'name')->textInput()->label('Имя')?>
+
+        <?=$form->field($model, 'email')->textInput()->label('e-mail')?>
+
         <?=$form->field($model, 'password')->passwordInput()?>
 
-        <?=$form->field($model, 'name')->textInput([
-	'template' => "<div class=\"col-lg-8\">{error}</div>",
-])->label('Имя')?>
+        <?=$form->field($model, 'confirm')->passwordInput()?>
 
         <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">

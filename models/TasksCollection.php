@@ -9,10 +9,6 @@ use yii\data\ActiveDataProvider;
 class TasksCollection extends Model {
 	public $test;
 
-	/*public function __construct() {
-		self::$allTasks = Tasks::find()->all();
-	}*/
-
 	public function rules() {
 		return [
 			[['test'], TaskValidator::class], //правило проверяет является ли order числом
@@ -30,7 +26,10 @@ class TasksCollection extends Model {
 	}
 
 	public function getDataProvider() {
-		$query = Tasks::find();
+		$query = Tasks::find()->where(['or',
+			['creator_id' => \Yii::$app->user->identity->id],
+			['responsible_id' => \Yii::$app->user->identity->id],
+		]);
 
 		return $dataProvider = new ActiveDataProvider([
 			'query' => $query,

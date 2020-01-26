@@ -7,13 +7,13 @@ class="
 	task-container
 	big-task
 	flex-row
-	<?if ($task['status_id'] == 4): ?>
+	<?if ($task->status_id == 4): ?>
 	<?='bgc-red'?>
-	<?elseif ($task['status_id'] == 3): ?>
+	<?elseif ($task->status_id == 3): ?>
 	<?='bgc-grey'?>
-	<?elseif ($task['status_id'] == 2): ?>
+	<?elseif ($task->status_id == 2): ?>
 	<?='bgc-yellow'?>
-	<?elseif ($task['status_id'] == 1): ?>
+	<?elseif ($task->status_id == 1): ?>
 	<?='bgc-green'?>
 	<?endif;?>
 ">
@@ -28,17 +28,17 @@ class="
 		</div>
 
 		<div class="task-info-value flex-column">
-			<p><?=$task['id']?></p>
-			<p><?=$task->priority['name']?></p>
-			<p><?=$task['deadline']?></p>
-			<p><?=$task['creator_id']?></p>
-			<p><?=$task['responsible_id']?></p>
-			<p><?=$task->status['name']?></p>
+			<p><?=$task->id?></p>
+			<p><?=$task->priority->name?></p>
+			<p><?=$task->deadline?></p>
+			<p><?=$task->creator->name?></p>
+			<p><?=$task->responsible->name?></p>
+			<p><?=$task->status->name?></p>
 		</div>
 	</div>
 	<div class="task-desc flex-column">
-		<span class="text-size3 text-bold"><?=$task['title']?></span>
+		<span class="text-size3 text-bold"><?=$task->title?></span>
 		<span>Описание: </span>
-		<p><?=$task['description']?></p>
+		<p><?=$task->description?></p>
 	</div>
 </div>
