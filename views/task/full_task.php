@@ -1,5 +1,5 @@
 <div class="title-top flex-row">
-	<h1><?=$title . $task['id']?></h1>
+	<h1><?=$title . $task->id?></h1>
 	<a class="btn btn-lg btn-info" href="index.php?r=task">Назад</a>
 </div>
 <div
@@ -18,7 +18,7 @@ class="
 	<?endif;?>
 ">
 	<div class="task-info flex-row">
-		<div class="task-info-tag flex-column">
+		<div class="task-info-tag flex-column jc-sa">
 			<p>Номер задания:</p>
 			<p>Приоритет:</p>
 			<p>Выполнить до:</p>
@@ -27,7 +27,7 @@ class="
 			<p>Статус:</p>
 		</div>
 
-		<div class="task-info-value flex-column">
+		<div class="task-info-value flex-column jc-sa">
 			<p><?=$task->id?></p>
 			<p><?=$task->priority->name?></p>
 			<p><?=$task->deadline?></p>
@@ -36,9 +36,14 @@ class="
 			<p><?=$task->status->name?></p>
 		</div>
 	</div>
-	<div class="task-desc flex-column">
+	<div class="task-desc flex-column jc-sa">
 		<span class="text-size3 text-bold"><?=$task->title?></span>
-		<span>Описание: </span>
-		<p><?=$task->description?></p>
+		<div class="task-desc-text flex-column ai-c fb-20">
+			<span class="flex-grow">Описание: </span>
+			<p><?=$task->description?></p>
+		</div>
 	</div>
+</div>
+<div class="add-task-container flex-row jc-c center">
+	<a class="btn btn-lg btn-primary" href="index.php?r=task/edit&id=<?=$task['id']?>">Изменить задание</a>
 </div>

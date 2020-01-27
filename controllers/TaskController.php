@@ -1,15 +1,14 @@
 <?php
 
 namespace app\controllers;
-use app\models\NewTaskForm;
 use app\models\tables\Priority;
 use app\models\tables\Status;
 use app\models\tables\Users;
+use app\models\TaskForm;
 use app\models\TasksCollection;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
-use yii\helpers\Url;
 
 class TaskController extends Controller {
 	public function actionIndex() {
@@ -34,7 +33,7 @@ class TaskController extends Controller {
 
 	public function actionFull($id) {
 		return $this->render('full_task', [
-			'title' => 'Task # ',
+			'title' => 'Задание # ',
 			'task' => TasksCollection::getTask($id),
 		]);
 	}
@@ -46,15 +45,33 @@ class TaskController extends Controller {
 	}
 
 	public function actionCreate() {
-		$model = new NewTaskForm();
+		$model = new TaskForm();
 
 		if ($model->load(Yii::$app->request->post()) && $model->createTask()) {
 			return $this->redirect('index.php?r=task/index');
 		}
 
 		return $this->render('task_create', [
-			'title' => 'Описание задания',
-			'arrUsers' => ArrayHelper::map(Users::find()->all(), 'id', 'name'),		
+			'title' => 'Создание задания',
+			'arrUsers' => ArrayHelper::map(Users::find()->all(), 'id', 'name'),
+			'currentUser' => [Yii::$app->user->identity->id => Yii::$app->user->identity->name],
+			'arrPriority' => ArrayHelper::map(Priority::find()->all(), 'id', 'name'),
+			'arrStatus' => ArrayHelper::map(Status::find()->all(), 'id', 'name'),
+			'model' => $model,
+		]);
+	}
+
+	public function actionEdit($id) {
+		$model = new TaskForm();
+
+		if ($model->load(Yii::$app->request->post()) && $model->editTask()) {
+			return $this->redirect('index.php?r=task/index');
+		}
+
+		return $this->render('task_edit', [
+			'title' => 'Изменение задания',
+			'task' => TasksCollection::getTask($id),
+			'arrUsers' => ArrayHelper::map(Users::find()->all(), 'id', 'name'),
 			'currentUser' => [Yii::$app->user->identity->id => Yii::$app->user->identity->name],
 			'arrPriority' => ArrayHelper::map(Priority::find()->all(), 'id', 'name'),
 			'arrStatus' => ArrayHelper::map(Status::find()->all(), 'id', 'name'),

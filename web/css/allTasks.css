@@ -32,17 +32,15 @@
 
 .task-info-tag{
     margin-right: 1rem;
-    justify-content: space-around;
 }
 
 .task-info-value{
     margin-right: 1rem;
-    justify-content: space-around;
+    padding: 0 2rem;
 }
 
 .task-desc{
     width: 50%;
-    justify-content: space-around;
 }
 
 .task-desc > span {

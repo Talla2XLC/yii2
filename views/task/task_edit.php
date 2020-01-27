@@ -23,10 +23,19 @@ class="
 	task-container
 	big-task
 	flex-row
-	bgc-green
+	<?if ($task->status_id == 4): ?>
+	<?='bgc-red'?>
+	<?elseif ($task->status_id == 3): ?>
+	<?='bgc-grey'?>
+	<?elseif ($task->status_id == 2): ?>
+	<?='bgc-yellow'?>
+	<?elseif ($task->status_id == 1): ?>
+	<?='bgc-green'?>
+	<?endif;?>
 ">
 	<div class="task-info flex-row">
 		<div class="task-info-tag flex-column jc-sa">
+			<p>Номер:</p>
 			<p>Приоритет:</p>
 			<p>Выполнить до:</p>
 			<p>Назначил:</p>
@@ -35,33 +44,40 @@ class="
 		</div>
 
 		<div class="task-info-value flex-column jc-sa flex-grow">
+			<?=$form->field($model, 'id')->dropdownList(
+	[$task->id => $task->id],
+	['value' => $task->id]
+)?>
 			<?=$form->field($model, 'priority_id')->dropdownList(
 	$arrPriority,
-	['autofocus' => true]
+	['autofocus' => true, 'value' => $task->priority_id]
 )?>
-			<?=$form->field($model, 'deadline')->textInput()?>
+			<?=$form->field($model, 'deadline')->textInput(['value' => $task->deadline])?>
 			<?=$form->field($model, 'creator_id')->dropdownList(
-	$currentUser
+	[$task->creator->id => $task->creator->name],
+	['value' => $task->creator_id, 'type' => 'number']
 )?>
 			<?=$form->field($model, 'responsible_id')->dropdownList(
-	$arrUsers
+	$arrUsers,
+	['value' => $task->responsible->id]
 )?>
 			<?=$form->field($model, 'status_id')->dropdownList(
-	$arrStatus
+	$arrStatus,
+	['value' => $task->status_id]
 )?>
 		</div>
 	</div>
 	<div class="task-desc flex-column jc-sa">
-		<?=$form->field($model, 'title')->textInput()?>
+		<?=$form->field($model, 'title')->textInput(['value' => $task->title])?>
 		<div class="task-desc-text flex-column ai-c fb-20">
 			<span class="flex-grow">Описание: </span>
-			<?=$form->field($model, 'description')->textarea(['rows' => "8", 'cols' => "20"])?>
+			<?=$form->field($model, 'description')->textarea(['rows' => "8", 'cols' => "20", 'value' => $task->description])?>
 		</div>
 	</div>
 </div>
 <div class="form-group">
     <div class="col-lg-offset-1 col-lg-11 flex-row jc-c">
-        <?=Html::submitButton('Добавить задание', ['class' => 'btn btn-lg btn-success', 'name' => 'register-button'])?>
+        <?=Html::submitButton('Сохранить изменения', ['class' => 'btn btn-lg btn-success', 'name' => 'register-button'])?>
     </div>
 </div>
 

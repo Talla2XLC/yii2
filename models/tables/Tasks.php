@@ -2,7 +2,7 @@
 
 namespace app\models\tables;
 
-use Yii;
+use \yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "Tasks".
@@ -17,12 +17,25 @@ use Yii;
  * @property int|null $status_id
  * @property Test $status
  */
-class Tasks extends \yii\db\ActiveRecord {
+class Tasks extends ActiveRecord {
 	/**
 	 * {@inheritdoc}
 	 */
 	public static function tableName() {
 		return 'Tasks';
+	}
+
+	public function behaviors() {
+		return [
+			'timestamp' => [
+				'class' => 'yii\behaviors\TimestampBehavior',
+				'attributes' => [
+					ActiveRecord::EVENT_BEFORE_INSERT => ['create_date', 'modified_date'],
+					ActiveRecord::EVENT_BEFORE_UPDATE => ['modified_date'],
+				],
+				'value' => function () {return date('Y-m-d');},
+			],
+		];
 	}
 
 	/**
@@ -67,6 +80,8 @@ class Tasks extends \yii\db\ActiveRecord {
 			'priority' => 'Priority',
 			'deadline' => 'Deadline',
 			'status_id' => 'Status ID',
+			'modified_date' => 'Modified_date',
+			'create_date' => 'Create_date',
 		];
 	}
 }

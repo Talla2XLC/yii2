@@ -69,7 +69,14 @@ echo Nav::widget([
 			. Html::endForm()
 			. '</li>'
 
-		)],
+		),
+		[
+			'label' => 'Зарегистрироваться',
+			'url' => ['/site/register'],
+			'visible' => Yii::$app->user->isGuest,
+		],
+	],
+
 ]);
 NavBar::end();
 ?>

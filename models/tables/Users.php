@@ -37,6 +37,8 @@ class Users extends \yii\db\ActiveRecord {
 			'id' => 'ID',
 			'username' => 'Username',
 			'password' => 'Password',
+			'modified_date' => 'Modified_date',
+			'create_date' => 'Create_date',
 		];
 	}
 
@@ -45,6 +47,8 @@ class Users extends \yii\db\ActiveRecord {
 			'id',
 			'username' => 'username',
 			'password',
+			'modified_date',
+			'create_date',
 		];
 	}
 }
