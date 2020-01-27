@@ -19,6 +19,19 @@ class Users extends \yii\db\ActiveRecord {
 		return 'users';
 	}
 
+	public function behaviors() {
+		return [
+			'timestamp' => [
+				'class' => 'yii\behaviors\TimestampBehavior',
+				'attributes' => [
+					ActiveRecord::EVENT_BEFORE_INSERT => ['create_date', 'modified_date'],
+					ActiveRecord::EVENT_BEFORE_UPDATE => ['modified_date'],
+				],
+				'value' => function () {return date('Y-m-d');},
+			],
+		];
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */

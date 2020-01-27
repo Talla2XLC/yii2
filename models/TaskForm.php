@@ -52,7 +52,7 @@ class TaskForm extends Model {
 			]);
 
 			$newTask->save();
-			// var_dump($newTask); exit;
+
 			$this->trigger(static::EVENT_TASK_SUCCESSFULLY_SAVED, $event);
 			return true;
 		}
