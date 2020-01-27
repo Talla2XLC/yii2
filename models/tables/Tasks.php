@@ -12,7 +12,7 @@ use Yii;
  * @property string|null $description
  * @property int|null $creator_id
  * @property int|null $responsible_id
- * @property string|null $priority
+ * @property int|null $priority
  * @property string|null $deadline
  * @property int|null $status_id
  * @property Test $status
@@ -34,7 +34,7 @@ class Tasks extends \yii\db\ActiveRecord {
 			[['creator_id', 'responsible_id', 'status_id'], 'integer'],
 			[['deadline'], 'safe'],
 			[['title'], 'string', 'max' => 50],
-			[['description', 'priority'], 'string', 'max' => 255],
+			[['description'], 'string', 'max' => 255],
 		];
 	}
 

@@ -4,6 +4,7 @@
 		task-container
 		flex-row
 		link
+		side-margin
 		<?if ($task->status_id == 4): ?>
 		<?='bgc-red'?>
 		<?elseif ($task->status_id == 3): ?>

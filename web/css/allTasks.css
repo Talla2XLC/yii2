@@ -11,7 +11,8 @@
     border: 1px solid black;
     border-radius: 1rem;
     box-sizing: border-box;
-    margin: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     padding: 1rem;
     color: black;
 }
@@ -41,6 +42,7 @@
 
 .task-desc{
     width: 50%;
+    justify-content: space-around;
 }
 
 .task-desc > span {

@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\models\tables\Tasks;
 use yii\base\Model;
+use yii\validators\DateValidator;
 
 /**
  * LoginForm is the model behind the login form.
@@ -12,19 +13,21 @@ use yii\base\Model;
  *
  */
 class NewTaskForm extends Model {
-	public $id;
-	public $priority;
+	public $priority_id;
 	public $deadline;
 	public $creator_id;
 	public $responsible_id;
 	public $title;
 	public $description;
-	public $status;
+	public $status_id;
 
-	const TASK_USER_CREATE_FAILED = 'event_user_create_failed';
-	const TASK_USER_SUCCESSFULLY_SAVED = 'event_user_successfully_saved';
-	const TASK_USER_CREATE_START = 'event_user_create_start';
-	const TASK_USER_CREATE_COMPLETE = 'event_user_create_complete';
+	const EVENT_TASK_CREATE_FAILED = 'event_task_create_failed';
+	const EVENT_TASK_SUCCESSFULLY_SAVED = 'event_task_successfully_saved';
+	const EVENT_TASK_CREATE_START = 'event_task_create_start';
+
+	public function behaviors(){
+		return parent::behaviors();
+	}
 
 	/**
 	 * @return array the validation rules.
@@ -32,11 +35,11 @@ class NewTaskForm extends Model {
 	public function rules() {
 		return [
 			// username and password are both required
-			[['id', 'priority', 'deadline', 'creator_id', 'responsible_id', 'title', 'description', 'status'], 'required'],
+			[['priority_id', 'deadline', 'creator_id', 'responsible_id', 'title', 'description', 'status_id'], 'required'],
 			// password validation
 			[['title'], 'string', 'max' => 20],
 			[['description'], 'string'],
-			[['deadline'], 'match', 'pattern' => '^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$', 'message' => 'Дата должна вводиться в формате ХХ.ХХ.ХХХХ'],
+			[['deadline'], 'date', 'format' => 'dd.MM.yyyy', 'message' => 'Дата должна вводиться в формате ХХ.ХХ.ХХХХ'],
 		];
 	}
 
@@ -44,19 +47,19 @@ class NewTaskForm extends Model {
 		$this->trigger(static::EVENT_TASK_CREATE_START);
 		if ($this->validate()) {
 			$newTask = new Tasks([
-				'id' => $this->id,
-				'priority' => $this->priority,
-				'deadline' => $this->deadline,
+				'priority_id' => $this->priority_id,
+				'deadline' => \Yii::$app->formatter->asDate($this->deadline, 'php:Y-m-d'),
 				'creator_id' => $this->creator_id,
 				'responsible_id' => $this->responsible_id,
 				'title' => $this->title,
 				'description' => $this->description,
-				'status' => $this->status,
+				'status_id' => $this->status_id,
 			]);
-
-			$newTask->save();
+			
+			$answ = $newTask->save();
+			// var_dump($newTask); exit;
 			$this->trigger(static::EVENT_TASK_SUCCESSFULLY_SAVED, $event);
-			return $this->trigger(static::EVENT_TASK_CREATE_COMPLETE);
+			return true;
 		}
 		$this->trigger(static::EVENT_TASK_CREATE_FAILED);
 		return false;

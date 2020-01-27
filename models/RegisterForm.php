@@ -72,11 +72,13 @@ class RegisterForm extends Model {
 			]);
 
 			$newUser->save();
+
 			// echo "пользователь сохранён \<br>";
 			$event = new UserSuccessfullySavedEvent(['userId' => $newUser->id]);
 			$this->trigger(static::EVENT_USER_SUCCESSFULLY_SAVED, $event);
-			echo "метод завершён \<br>";
-			return $this->trigger(static::EVENT_USER_CREATE_COMPLETE);
+			// echo "метод завершён \<br>";
+			$this->trigger(static::EVENT_USER_CREATE_COMPLETE);
+			return true;
 		}
 		$this->trigger(static::EVENT_USER_CREATE_FAILED);
 		return false;

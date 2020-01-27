@@ -41,7 +41,7 @@ class EventController extends Controller {
 	}
 
 	public function actionTest() {
-		//отработает ли событие с actionIndex ??
+		
 		$model = new RegisterForm([
 			'username' => 'Pupkin' . rand(),
 			'password' => 'qwerty',

@@ -9,6 +9,7 @@ use app\models\TasksCollection;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
+use yii\helpers\Url;
 
 class TaskController extends Controller {
 	public function actionIndex() {
@@ -46,13 +47,15 @@ class TaskController extends Controller {
 
 	public function actionCreate() {
 		$model = new NewTaskForm();
+
 		if ($model->load(Yii::$app->request->post()) && $model->createTask()) {
-			return $this->goBack();
+			return $this->redirect('index.php?r=task/index');
 		}
 
 		return $this->render('task_create', [
 			'title' => 'Описание задания',
-			'arrUsers' => ArrayHelper::map(Users::find()->all(), 'id', 'name'),
+			'arrUsers' => ArrayHelper::map(Users::find()->all(), 'id', 'name'),		
+			'currentUser' => [Yii::$app->user->identity->id => Yii::$app->user->identity->name],
 			'arrPriority' => ArrayHelper::map(Priority::find()->all(), 'id', 'name'),
 			'arrStatus' => ArrayHelper::map(Status::find()->all(), 'id', 'name'),
 			'model' => $model,

@@ -151,10 +151,13 @@ a.desc:after {
 }
 
 /*text-style section*/
+.text-size1{
+    font-size: 1.5rem;
+}
 .text-size2{
     font-size: 2rem;
 }
-.text-size2{
+.text-size3{
     font-size: 3rem;
 }
 .text-bold{
@@ -179,4 +182,9 @@ a.desc:after {
 
 .center{
     text-align: center;
+}
+
+.side-margin{
+    margin-left: 2rem;
+    margin-right: 2rem;
 }

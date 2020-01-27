@@ -1,6 +1,7 @@
 <?php
 
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 ?>
 
 <div class="title-top flex-row">
@@ -11,8 +12,10 @@ use yii\bootstrap\ActiveForm;
 	'id' => 'new-task-form',
 	'layout' => 'horizontal',
 	'fieldConfig' => [
-		'template' => "\n<div >{input}</div>\n<div>{error}</div>",
+		'template' => "\n<div>{input}</div>\n<div>{error}</div>",
 		'labelOptions' => ['class' => 'col-lg-1 control-label'],
+		'errorOptions'=>['class'=>'text-size1 red'],
+		'options' => ['class' => '']
 	],
 ]);?>
 <div
@@ -31,28 +34,33 @@ class="
 			<p>Статус:</p>
 		</div>
 
-		<div class="task-info-value help1 flex-column">
-			<?=$form->field($model, 'priority')->dropdownList(
+		<div class="task-info-value flex-column">
+			<?=$form->field($model, 'priority_id')->dropdownList(
 	$arrPriority,
 	['autofocus' => true]
 )?>
 			<?=$form->field($model, 'deadline')->textInput()?>
 			<?=$form->field($model, 'creator_id')->dropdownList(
-	$arrUsers
+	$currentUser
 )?>
 			<?=$form->field($model, 'responsible_id')->dropdownList(
 	$arrUsers
 )?>
-			<?=$form->field($model, 'status')->dropdownList(
+			<?=$form->field($model, 'status_id')->dropdownList(
 	$arrStatus
 )?>
 		</div>
 	</div>
-	<div class="task-desc help2 flex-column">
+	<div class="task-desc flex-column">
 		<?=$form->field($model, 'title')->textInput()?>
 		<span>Описание: </span>
-		<?=$form->field($model, 'description')->textarea(['rows' => "12", 'cols' => "40"])?>
+		<?=$form->field($model, 'description')->textarea(['rows' => "8", 'cols' => "20"])?>
 	</div>
+</div>
+<div class="form-group">
+    <div class="col-lg-offset-1 col-lg-11 flex-row jc-c">
+        <?=Html::submitButton('Добавить задание', ['class' => 'btn btn-lg btn-success', 'name' => 'register-button'])?>
+    </div>
 </div>
 
 <?php ActiveForm::end();?>
