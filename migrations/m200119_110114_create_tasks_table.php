@@ -16,7 +16,7 @@ class m200119_110114_create_tasks_table extends Migration {
 			'description' => $this->string(),
 			'creator_id' => $this->integer(),
 			'responsible_id' => $this->integer(),
-			'priority_id' => $this->string(),
+			'priority_id' => $this->integer(),
 			'deadline' => $this->date(),
 			'status_id' => $this->integer(),
 		]);

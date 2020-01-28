@@ -10,7 +10,7 @@ class="
 	bgc-red
 ">
 	<div class="task-info flex-row">
-		<div class="task-info-tag flex-column">
+		<div class="task-info-tag flex-column jc-sa">
 			<p>Номер задания:</p>
 			<p>Приоритет:</p>
 			<p>Выполнить до:</p>
@@ -19,7 +19,7 @@ class="
 			<p>Статус:</p>
 		</div>
 
-		<div class="task-info-value help1 flex-column">
+		<div class="task-info-value help1 flex-column jc-sa">
 			<p><- Порядковый номер задачи</p>
 			<p><- Приоритетность задачи от Major - Middle - Minor</p>
 			<p><- Срок выполнения</p>
@@ -28,9 +28,11 @@ class="
 			<p><- Текущий статус: opened - in progress - closed - overdue</p>
 		</div>
 	</div>
-	<div class="task-desc help2 flex-column">
+	<div class="task-desc help2 flex-column jc-sa">
 		<span>Название задания</span>
-		<span>Описание: </span>
-		<p class="green center">Здесь располагается детальное описание задания</p>
+		<div class="task-desc-text flex-column ai-c fb-20">
+			<span>Описание: </span>
+			<p class="green center">Здесь располагается детальное описание задания</p>
+		</div>
 	</div>
 </div>

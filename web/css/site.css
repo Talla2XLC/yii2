@@ -114,6 +114,10 @@ a.desc:after {
     outline: none;
 }
 
+.width-100{
+    width: 100%;
+}
+
 .flex-row{    
     display: -webkit-flex;
     display: -moz-flex;
@@ -132,6 +136,30 @@ a.desc:after {
     flex-flow: column nowrap    
 }
 
+.jc-c{
+    justify-content: center;
+}
+
+.jc-sb{
+    justify-content: space-between;
+}
+
+.jc-sa{
+    justify-content: space-around;
+}
+
+.ai-c{
+    align-items: center;
+}
+
+.flex-grow{
+    flex-grow: 1;
+}
+
+.fb-20{
+    flex-basis: 20%;
+}
+
 /*backgrount-style section*/
 .bgc-red{
     background-color: #ff000052;
@@ -147,10 +175,13 @@ a.desc:after {
 }
 
 /*text-style section*/
+.text-size1{
+    font-size: 1.5rem;
+}
 .text-size2{
     font-size: 2rem;
 }
-.text-size2{
+.text-size3{
     font-size: 3rem;
 }
 .text-bold{
@@ -175,4 +206,9 @@ a.desc:after {
 
 .center{
     text-align: center;
+}
+
+.side-margin{
+    margin-left: 2rem;
+    margin-right: 2rem;
 }

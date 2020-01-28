@@ -1,8 +1,18 @@
+.preview-container{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-flow: row wrap;
+}
+
 .task-container {
     border: 1px solid black;
     border-radius: 1rem;
     box-sizing: border-box;
-    margin: 2rem 0;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     padding: 1rem;
     color: black;
 }
@@ -22,12 +32,11 @@
 
 .task-info-tag{
     margin-right: 1rem;
-    justify-content: space-around;
 }
 
 .task-info-value{
     margin-right: 1rem;
-    justify-content: space-around;
+    padding: 0 2rem;
 }
 
 .task-desc{

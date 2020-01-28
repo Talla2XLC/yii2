@@ -2,7 +2,7 @@
 
 namespace app\models\tables;
 
-use Yii;
+use \yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "Tasks".
@@ -12,17 +12,30 @@ use Yii;
  * @property string|null $description
  * @property int|null $creator_id
  * @property int|null $responsible_id
- * @property string|null $priority
+ * @property int|null $priority
  * @property string|null $deadline
  * @property int|null $status_id
  * @property Test $status
  */
-class Tasks extends \yii\db\ActiveRecord {
+class Tasks extends ActiveRecord {
 	/**
 	 * {@inheritdoc}
 	 */
 	public static function tableName() {
 		return 'Tasks';
+	}
+
+	public function behaviors() {
+		return [
+			'timestamp' => [
+				'class' => 'yii\behaviors\TimestampBehavior',
+				'attributes' => [
+					ActiveRecord::EVENT_BEFORE_INSERT => ['create_date', 'modified_date'],
+					ActiveRecord::EVENT_BEFORE_UPDATE => ['modified_date'],
+				],
+				'value' => function () {return date('Y-m-d');},
+			],
+		];
 	}
 
 	/**
@@ -34,7 +47,7 @@ class Tasks extends \yii\db\ActiveRecord {
 			[['creator_id', 'responsible_id', 'status_id'], 'integer'],
 			[['deadline'], 'safe'],
 			[['title'], 'string', 'max' => 50],
-			[['description', 'priority'], 'string', 'max' => 255],
+			[['description'], 'string', 'max' => 255],
 		];
 	}
 
@@ -67,6 +80,8 @@ class Tasks extends \yii\db\ActiveRecord {
 			'priority' => 'Priority',
 			'deadline' => 'Deadline',
 			'status_id' => 'Status ID',
+			'modified_date' => 'Modified_date',
+			'create_date' => 'Create_date',
 		];
 	}
 }

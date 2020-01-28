@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'value' => 'name',
 			'filter' => $arrUsers,
 		],
+		'email',
 
 		['class' => 'yii\grid\ActionColumn'],
 	],

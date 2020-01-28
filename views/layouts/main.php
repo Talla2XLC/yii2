@@ -45,6 +45,7 @@ echo Nav::widget([
 				['label' => 'Список задач', 'url' => ['task/index']],
 				['label' => 'Помощь', 'url' => ['/task/info']],
 			],
+			'visible' => !Yii::$app->user->isGuest,
 		],
 		[
 			'label' => 'Администрирование',
@@ -52,6 +53,7 @@ echo Nav::widget([
 				['label' => 'Задачи', 'url' => ['/task-admin/']],
 				['label' => 'Пользователи', 'url' => ['/user-admin/']],
 			],
+			'visible' => !Yii::$app->user->isGuest,
 		],
 		/*['label' => 'About', 'url' => ['/site/about']],
 		['label' => 'Contact', 'url' => ['/site/contact']],*/
@@ -67,7 +69,14 @@ echo Nav::widget([
 			. Html::endForm()
 			. '</li>'
 
-		)],
+		),
+		[
+			'label' => 'Зарегистрироваться',
+			'url' => ['/site/register'],
+			'visible' => Yii::$app->user->isGuest,
+		],
+	],
+
 ]);
 NavBar::end();
 ?>

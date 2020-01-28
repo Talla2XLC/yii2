@@ -8,7 +8,7 @@ $config = [
 	'id' => 'AI_TaskManager',
 	'name' => 'AI Task Manager',
 	'basePath' => dirname(__DIR__),
-	'bootstrap' => ['log'],
+	'bootstrap' => ['log', 'taskCreateMailer'],
 	'aliases' => [
 		'@bower' => '@vendor/bower-asset',
 		'@npm' => '@vendor/npm-asset',
@@ -43,6 +43,9 @@ $config = [
 					'levels' => ['error', 'warning'],
 				],
 			],
+		],
+		'taskCreateMailer' => [
+			'class' => 'app\models\eventHandlers\taskCreateMailer',
 		],
 		'db' => $db,
 		/*
