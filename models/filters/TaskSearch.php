@@ -58,14 +58,20 @@ class TaskSearch extends Tasks {
 			'id' => $this->id,
 			'creator_id' => $this->creator_id,
 			'responsible_id' => $this->responsible_id,
-			'deadline' => $this->deadline,
 			'status_id' => $this->status_id,
 		]);
 
 		$query->andFilterWhere(['like', 'title', $this->title])
 			->andFilterWhere(['like', 'description', $this->description])
-			->andFilterWhere(['like', 'priority_id', $this->priority_id]);
+			->andFilterWhere(['like', 'priority_id', $this->priority_id])
+			->andFilterWhere(['like', 'deadline', $this->deadline ? '-' . $this->deadline . '-' : '']);
 
 		return $dataProvider;
+	}
+
+	public function attributeLabels() {
+		return [
+			'deadline' => 'Сортировка по месяцу выполнения',
+		];
 	}
 }

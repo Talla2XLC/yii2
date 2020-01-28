@@ -8,17 +8,23 @@ $config = [
 	'id' => 'AI_TaskManager',
 	'name' => 'AI Task Manager',
 	'basePath' => dirname(__DIR__),
-	'bootstrap' => ['log', 'taskCreateMailer'],
+	'bootstrap' => ['log', 'bootstrap'],
 	'aliases' => [
 		'@bower' => '@vendor/bower-asset',
 		'@npm' => '@vendor/npm-asset',
 	],
 	'components' => [
+		'bootstrap' => [
+			'class' => \app\components\Bootstrap::class,
+		],
 		'request' => [
 			// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
 			'cookieValidationKey' => 'CKvEFvaspSiHf5cBO1n0nGl8BMQ7ko6e',
 		],
 		'cache' => [
+			'class' => 'yii\caching\FileCache',
+		],
+		'cache1' => [
 			'class' => 'yii\caching\FileCache',
 		],
 		'user' => [
@@ -43,9 +49,6 @@ $config = [
 					'levels' => ['error', 'warning'],
 				],
 			],
-		],
-		'taskCreateMailer' => [
-			'class' => 'app\models\eventHandlers\taskCreateMailer',
 		],
 		'db' => $db,
 		/*

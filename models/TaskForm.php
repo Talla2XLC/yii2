@@ -34,7 +34,7 @@ class TaskForm extends Model {
 			['id', 'number'],
 			[['title'], 'string', 'max' => 20],
 			[['description'], 'string'],
-			[['deadline'], 'date', 'format' => 'yyyy-MM-dd', 'message' => 'Дата должна вводиться в формате ХХХХ.ХХ.ХХ'],
+			[['deadline'], 'date', 'format' => 'yyyy-MM-dd', 'message' => 'Дата должна вводиться в формате ХХХХ-ХХ-ХХ'],
 		];
 	}
 
