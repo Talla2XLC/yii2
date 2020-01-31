@@ -34,7 +34,7 @@ class TaskForm extends Model {
 			['id', 'number'],
 			[['title'], 'string', 'max' => 20],
 			[['description'], 'string'],
-			[['deadline'], 'date', 'format' => 'yyyy-MM-dd', 'message' => 'Дата должна вводиться в формате ХХХХ-ХХ-ХХ'],
+			[['deadline'], 'date', 'format' => 'dd.MM.yyyy', 'message' => 'Дата должна вводиться в формате ДД.ММ.ГГГГ'],
 		];
 	}
 
@@ -43,7 +43,7 @@ class TaskForm extends Model {
 		if ($this->validate()) {
 			$newTask = new Tasks([
 				'priority_id' => $this->priority_id,
-				'deadline' => \Yii::$app->formatter->asDate($this->deadline, 'php:Y-m-d'),
+				'deadline' => date('Y-m-d', strtotime($this->deadline)),
 				'creator_id' => $this->creator_id,
 				'responsible_id' => $this->responsible_id,
 				'title' => $this->title,

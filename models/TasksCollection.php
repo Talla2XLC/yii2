@@ -20,7 +20,7 @@ class TasksCollection extends Model {
 		return isset($allTasks) ? $allTasks : null;
 	}
 
-	public function getTask($id) {
+	public static function getTask($id) {
 		$task = Tasks::findOne(['id' => $id]);
 		return isset($task) ? $task : null;
 	}
