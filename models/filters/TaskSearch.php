@@ -64,7 +64,7 @@ class TaskSearch extends Tasks {
 		$query->andFilterWhere(['like', 'title', $this->title])
 			->andFilterWhere(['like', 'description', $this->description])
 			->andFilterWhere(['like', 'priority_id', $this->priority_id])
-			->andFilterWhere(['like', 'deadline', $this->deadline ? '-' . $this->deadline . '-' : '']);
+			->andFilterWhere(['=', 'MONTH(deadline)', $this->deadline ]);
 
 		return $dataProvider;
 	}
