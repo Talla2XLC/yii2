@@ -2,6 +2,7 @@
 
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use app\widgets\TaskImagesWidget;
 ?>
 
 <div class="title-top flex-row">
@@ -75,10 +76,14 @@ class="
 		</div>
 	</div>
 </div>
+<?=TaskImagesWidget::widget(['task' => $task, 'images' => $images])?>
+
 <div class="form-group">
     <div class="col-lg-offset-1 col-lg-11 flex-row jc-c">
+        <?=$form->field($model, 'img')->fileInput(['class' => 'bgc-grey btn-lg'])?>
         <?=Html::submitButton(Yii::t('app', 'task_edit_commit_btn'), ['class' => 'btn btn-lg btn-success', 'name' => 'register-button'])?>
     </div>
 </div>
 
 <?php ActiveForm::end();?>
+

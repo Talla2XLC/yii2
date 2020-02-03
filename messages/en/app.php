@@ -29,6 +29,7 @@ return [
     'task_status' => 'Status',
     'task_title' => 'Task title',
     'task_description' => 'Description',
+    'task_images' => 'Relevant images',
 
     //Task info page
     'task_info_number' => 'Task index number',
@@ -62,6 +63,8 @@ return [
     'task_create_btn' => 'Create new task',
     'task_edit_commit_btn' => 'Save changes',
     'task_create_commit_btn' => 'Create task',
+    'add_img_btn' => 'Add image',
+    'upload_img_btn' => 'Upload image',
 
     //Contact form
     'contact_name' => 'Name'

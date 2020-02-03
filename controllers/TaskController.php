@@ -10,7 +10,9 @@ use app\models\TaskForm;
 use app\models\TasksCollection;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 class TaskController extends Controller {
 	public function actionIndex() {
@@ -41,10 +43,21 @@ class TaskController extends Controller {
 	}
 
 	public function actionFull($id) {
+        $model = new TaskForm();
+
+        if($model->load(\Yii::$app->request->post())){
+            $model->img = UploadedFile::getInstance($model, 'img');
+            $model->saveImg();
+        }
+
+        $images=TasksCollection::getSmallImages($id);
+
 		return $this->render('full_task', [
 			'title' => Yii::t('app', 'task_full_header'),
 			'task' => TasksCollection::getTask($id),
-		]);
+            'model' => $model,
+            'images' => $images
+        ]);
 	}
 
 	public function actionInfo() {
@@ -74,8 +87,12 @@ class TaskController extends Controller {
 		$model = new TaskForm();
 
 		if ($model->load(Yii::$app->request->post()) && $model->editTask()) {
+            $model->img = UploadedFile::getInstance($model, 'img');
+            $model->saveImg();
 			return $this->redirect('index.php?r=task/index');
 		}
+
+        $images=TasksCollection::getSmallImages($id);
 
 		return $this->render('task_edit', [
 			'title' => Yii::t('app', 'task_edit_header'),
@@ -85,6 +102,7 @@ class TaskController extends Controller {
 			'arrPriority' => ArrayHelper::map(Priority::find()->all(), 'id', 'name'),
 			'arrStatus' => ArrayHelper::map(Status::find()->all(), 'id', 'name'),
 			'model' => $model,
+            'images' => $images
 		]);
 	}
 }

@@ -29,6 +29,7 @@ return [
     'task_status' => 'Статус',
     'task_title' => 'Название задания',
     'task_description' => 'Описание',
+    'task_images' => 'Релевантные изображения',
 
     //Task info page
     'task_info_number' => 'Порядковый номер задачи',
@@ -62,6 +63,8 @@ return [
     'task_create_btn' => 'Создать новое задание',
     'task_edit_commit_btn' => 'Сохранить изменения',
     'task_create_commit_btn' => 'Добавить задание',
+    'add_img_btn' => 'Добавить картинку',
+    'upload_img_btn' => 'Загрузить изображение',
 
     //Contact form
     'contact_name' => 'Имя'

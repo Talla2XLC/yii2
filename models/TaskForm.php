@@ -4,6 +4,8 @@ namespace app\models;
 
 use app\models\tables\Tasks;
 use yii\base\Model;
+use yii\helpers\FileHelper;
+use yii\imagine\Image;
 
 /**
  * LoginForm is the model behind the login form.
@@ -20,6 +22,7 @@ class TaskForm extends Model {
 	public $title;
 	public $description;
 	public $status_id;
+	public $img;
 
 	const EVENT_TASK_CREATE_FAILED = 'event_task_create_failed';
 	const EVENT_TASK_SUCCESSFULLY_SAVED = 'event_task_successfully_saved';
@@ -35,6 +38,7 @@ class TaskForm extends Model {
 			[['title'], 'string', 'max' => 20],
 			[['description'], 'string'],
 			[['deadline'], 'date', 'format' => 'dd.MM.yyyy', 'message' => 'Дата должна вводиться в формате ДД.ММ.ГГГГ'],
+            ['img', 'image']
 		];
 	}
 
@@ -78,4 +82,18 @@ class TaskForm extends Model {
 		}
 		return false;
 	}
+
+    public function saveImg()
+    {
+        $dirpath = \Yii::getAlias("@uploads/task_{$this->id}/");
+        $smallDirpath = \Yii::getAlias("@uploads/task_{$this->id}/small/");
+        $filepath = $dirpath."/{$this->img->name}";
+        FileHelper::createDirectory($dirpath);
+        FileHelper::createDirectory($smallDirpath);
+        if($this->img)
+        {
+            $this->img->saveAs($filepath);
+            Image::thumbnail($filepath, 100, 100)->save(\Yii::getAlias("@uploads/task_{$this->id}/small/{$this->img->name}"));
+        }
+    }
 }

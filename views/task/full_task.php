@@ -1,3 +1,10 @@
+<?php
+
+use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
+use app\widgets\TaskImagesWidget;
+?>
+
 <div class="title-top flex-row">
 	<h1><?=$title . $task->id?></h1>
 	<a class="btn btn-lg btn-info" href="index.php?r=task"><?=Yii::t('app', 'back_btn')?></a>
@@ -44,6 +51,27 @@ class="
 		</div>
 	</div>
 </div>
-<div class="add-task-container flex-row jc-c center">
-	<a class="btn btn-lg btn-primary" href="index.php?r=task/edit&id=<?=$task['id']?>"><?=Yii::t('app', 'task_edit_btn')?></a>
+<div class="img_div">
+    <?=TaskImagesWidget::widget(['task' => $task, 'images' => $images])?>
 </div>
+<div class="add-task-container flex-row jc-sa center">
+	<a class="btn btn-lg btn-primary" href="index.php?r=task/edit&id=<?=$task['id']?>"><?=Yii::t('app', 'task_edit_btn')?></a>
+    <?php $form = ActiveForm::begin([
+        'id' => 'img-upload-form',
+        'layout' => 'horizontal',
+        'options' => ['class' => 'flex-row'],
+        'fieldConfig' => [
+            'template' => "\n<div>{input}</div>\n<div>{error}</div>",
+            'labelOptions' => ['class' => 'col-lg-1 control-label'],
+            'errorOptions' => ['class' => 'text-size1 red'],
+            'options' => ['class' => 'width-100 flex-row'],
+        ],
+    ]); ?>
+
+    <?=$form->field($model, 'img')->fileInput(['class' => 'bgc-grey btn-lg'])?>
+    <?=$form->field($model, 'id')->hiddenInput(['value'=> $task->id])->label(false)?>
+    <?=Html::submitButton(Yii::t('app', 'upload_img_btn'), ['class' => 'btn btn-lg btn-success', 'name' => 'upload-button'])?>
+
+    <?php ActiveForm::end(); ?>
+</div>
+

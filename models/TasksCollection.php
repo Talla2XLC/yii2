@@ -6,6 +6,7 @@ use app\models\validation\TaskValidator;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use Yii;
+use yii\helpers\FileHelper;
 
 class TasksCollection extends Model
 {
@@ -38,5 +39,16 @@ class TasksCollection extends Model
             '11' => Yii::t('app', 'nov'),
             '12' => Yii::t('app', 'dec'),
         ];
+    }
+
+    public static function getSmallImages($id) {
+        $dirpath = \Yii::getAlias("@uploads/task_{$id}/");
+        $smallDirpath = \Yii::getAlias("@uploads/task_{$id}/small/");
+        FileHelper::createDirectory($dirpath);
+        FileHelper::createDirectory($smallDirpath);
+	    $path = FileHelper::normalizePath($smallDirpath);
+        $images=FileHelper::findFiles($path);
+
+        return $images;
     }
 }
