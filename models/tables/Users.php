@@ -2,7 +2,7 @@
 
 namespace app\models\tables;
 
-use Yii;
+use \yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "users".
@@ -11,7 +11,7 @@ use Yii;
  * @property string $username
  * @property string $password
  */
-class Users extends \yii\db\ActiveRecord {
+class Users extends ActiveRecord {
 	/**
 	 * {@inheritdoc}
 	 */

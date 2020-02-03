@@ -13,31 +13,47 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tasks-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?=Html::encode($this->title)?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?=Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary'])?>
+        <?=Html::a('Delete', ['delete', 'id' => $model->id], [
+	'class' => 'btn btn-danger',
+	'data' => [
+		'confirm' => 'Are you sure you want to delete this item?',
+		'method' => 'post',
+	],
+])?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'description',
-            'creator_id',
-            'responsible_id',
-            'priority_id',
-            'deadline',
-            'status_id',
-        ],
-    ]) ?>
+    <?
+$key = 'task_v';
+if ($this->beginCache($key, [
+	'duration' => 20,
+	'enabled' => false, //кэш не будет работать
+	'variations' => [$model->id, \Yii::$app->language], //вместо указания переменной в ключе $key
+	'dependency' => [
+		'class' => \Yii\caching\DbDependency::class,
+		'sql' => "SELECT COUNT(*) FROM tasks",
+	],
+])) {
+	echo DetailView::widget([
+		'model' => $model,
+		'attributes' => [
+			'id',
+			'title',
+			'description',
+			'creator_id',
+			'responsible_id',
+			'priority_id',
+			'deadline',
+			'status_id',
+		],
+	]);
+
+	$this->endCache();
+
+}
+;?>
 
 </div>

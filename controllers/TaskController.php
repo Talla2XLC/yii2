@@ -1,6 +1,8 @@
 <?php
 
 namespace app\controllers;
+
+use app\models\filters\TaskSearch;
 use app\models\tables\Priority;
 use app\models\tables\Status;
 use app\models\tables\Users;
@@ -18,7 +20,12 @@ class TaskController extends Controller {
 			'test' => 8,
 		]);
 
-		$dataProvider = $model::getDataProvider();
+		$searchModel = new TaskSearch();
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+		Yii::$app->db->cache(function () use ($dataProvider) {
+			$dataProvider->prepare();
+		}, 3600);
 
 		if (!$model->validate()) {
 			$error = $model->getErrors();
@@ -26,6 +33,7 @@ class TaskController extends Controller {
 		} else {
 			return $this->render('index', [
 				'title' => 'All Available Tasks',
+				'searchModel' => $searchModel,
 				'dataProvider' => $dataProvider,
 			]);
 		}

@@ -33,7 +33,7 @@ class Tasks extends ActiveRecord {
 					ActiveRecord::EVENT_BEFORE_INSERT => ['create_date', 'modified_date'],
 					ActiveRecord::EVENT_BEFORE_UPDATE => ['modified_date'],
 				],
-				'value' => function () {return date('Y-m-d');},
+				'value' => date('Y-m-d'),
 			],
 		];
 	}

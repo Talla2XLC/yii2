@@ -7,6 +7,8 @@ use app\models\LoginForm;
 use app\models\RegisterForm;
 use Yii;
 use yii\filters\AccessControl;
+use yii\filters\HttpCache;
+use yii\filters\PageCache;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\Response;
@@ -17,6 +19,18 @@ class SiteController extends Controller {
 	 */
 	public function behaviors() {
 		return [
+			'cache_about' => [
+				'class' => PageCache::class,
+				'duration' => 200,
+				'only' => ['about'],
+			],
+			'http_cahce_about' => [
+				'class' => HttpCache::class,
+				'only' => ['about'],
+				'lastModified' => function () {
+					return date("Y-m-d");
+				},
+			],
 			'access' => [
 				'class' => AccessControl::className(),
 				'only' => ['logout'],
@@ -58,7 +72,9 @@ class SiteController extends Controller {
 	 * @return string
 	 */
 	public function actionIndex() {
-		return $this->render('index');
+		return $this->render('index', [
+            'userName' => \Yii::$app->user->identity->name,
+        ]);
 	}
 
 	/**

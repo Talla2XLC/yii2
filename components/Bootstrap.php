@@ -1,20 +1,20 @@
 <?php
 
-namespace app\models\eventHandlers;
+namespace app\components;
+
 use app\models\tables\Users;
 use app\models\TaskForm;
 use yii\base\BootstrapInterface;
 use yii\base\Component;
 use yii\base\Event;
 
-class taskCreateMailer extends Component implements BootstrapInterface {
+class Bootstrap extends Component implements BootstrapInterface {
 	public function bootstrap($app) {
 		$this->setTaskCreateListener();
 	}
 	public function setTaskCreateListener() {
 		$handler = function (Event $event) {
 			$user = Users::findOne($event->sender->responsible_id);
-			// var_dump($user);exit;
 			$this->sendEmail($user);
 		};
 		Event::on(TaskForm::class, TaskForm::EVENT_TASK_SUCCESSFULLY_SAVED, $handler);

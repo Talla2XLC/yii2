@@ -8,6 +8,7 @@ use app\models\tables\Status;
 use app\models\tables\Tasks;
 use app\models\tables\Users;
 use Yii;
+use yii\caching\DbDependency;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -22,6 +23,22 @@ class TaskAdminController extends Controller {
 	 */
 	public function behaviors() {
 		return [
+/*			'cache_index' => [
+'class' => PageCache::class,
+'duration' => 200,
+'dependency' => [
+'class' => DbDependency::class,
+'sql' => "SELECT COUNT(*) FROM tasks",
+],
+'only' => ['index'],
+],
+'http_cahce' => [
+'class' => HttpCache::class,
+'only' => ['index'],
+'lastModified' => function () {
+return date("Y-m-d");
+},
+],*/
 			'verbs' => [
 				'class' => VerbFilter::className(),
 				'actions' => [
@@ -58,8 +75,20 @@ class TaskAdminController extends Controller {
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	public function actionView($id) {
+
+		$cache = \Yii::$app->cache;
+		$key = 'task' . $id;
+
+		$dependency = new DbDependency();
+		$dependency->sql = "SELECT COUNT(*) FROM tasks";
+
+		if (!$model = $cache->get($key)) {
+			$model = $this->findModel($id);
+			$cache->set($key, $model, 20, $dependency); //кэш на 10сек
+		}
+
 		return $this->render('view', [
-			'model' => $this->findModel($id),
+			'model' => $model,
 		]);
 	}
 

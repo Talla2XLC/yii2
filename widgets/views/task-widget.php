@@ -28,7 +28,7 @@
 			<div class="task-info-value flex-column">
 				<p><?=$task->id?></p>
 				<p><?=$task->priority->name?></p>
-				<p><?=$task->deadline?></p>
+				<p><?=date_format(date_create($task->deadline), 'd.m.Y')?></p>
 				<p><?=$task->creator->name?></p>
 				<p><?=$task->responsible->name?></p>
 				<p><?=$task->status->name?></p>

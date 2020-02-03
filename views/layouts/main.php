@@ -55,8 +55,8 @@ echo Nav::widget([
 			],
 			'visible' => !Yii::$app->user->isGuest,
 		],
-		/*['label' => 'About', 'url' => ['/site/about']],
-		['label' => 'Contact', 'url' => ['/site/contact']],*/
+		['label' => 'About', 'url' => ['/site/about']],
+		/*['label' => 'Contact', 'url' => ['/site/contact']],*/
 		Yii::$app->user->isGuest ? (
 			['label' => 'Войти', 'url' => ['/site/login']]
 		) : (

@@ -52,7 +52,7 @@ class="
 	$arrPriority,
 	['autofocus' => true, 'value' => $task->priority_id]
 )?>
-			<?=$form->field($model, 'deadline')->textInput(['value' => $task->deadline])?>
+			<?=$form->field($model, 'deadline')->textInput(['value' => date_format(date_create($task->deadline), 'd.m.Y')])?>
 			<?=$form->field($model, 'creator_id')->dropdownList(
 	[$task->creator->id => $task->creator->name],
 	['value' => $task->creator_id, 'type' => 'number']
