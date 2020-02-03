@@ -4,7 +4,6 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-	'language' => 'ru',
 	'id' => 'AI_TaskManager',
 	'name' => 'AI Task Manager',
 	'basePath' => dirname(__DIR__),
@@ -12,8 +11,17 @@ $config = [
 	'aliases' => [
 		'@bower' => '@vendor/bower-asset',
 		'@npm' => '@vendor/npm-asset',
+        '@uploads' => '@app/uploads'
 	],
 	'components' => [
+	    'i18n' => [
+	        'translations' => [
+	            'app*' => [
+	                'class' => \yii\i18n\PhpMessageSource::class,
+                    'basePath' => '@app/messages'
+                ]
+            ]
+        ],
 		'bootstrap' => [
 			'class' => \app\components\Bootstrap::class,
 		],

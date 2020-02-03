@@ -2,6 +2,7 @@
 
 namespace app\components;
 
+use app\models\Language;
 use app\models\tables\Users;
 use app\models\TaskForm;
 use yii\base\BootstrapInterface;
@@ -11,6 +12,7 @@ use yii\base\Event;
 class Bootstrap extends Component implements BootstrapInterface {
 	public function bootstrap($app) {
 		$this->setTaskCreateListener();
+		Language::startSession();
 	}
 	public function setTaskCreateListener() {
 		$handler = function (Event $event) {

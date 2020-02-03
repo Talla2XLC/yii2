@@ -24,7 +24,7 @@ class TaskController extends Controller {
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 		Yii::$app->db->cache(function () use ($dataProvider) {
-			$dataProvider->prepare();
+			return $dataProvider->prepare();
 		}, 3600);
 
 		if (!$model->validate()) {
@@ -32,16 +32,17 @@ class TaskController extends Controller {
 			print_r($error);exit;
 		} else {
 			return $this->render('index', [
-				'title' => 'All Available Tasks',
+				'title' => Yii::t('app', 'tasks_collection_header'),
 				'searchModel' => $searchModel,
 				'dataProvider' => $dataProvider,
+                'monthList' => TasksCollection::getMonthList()
 			]);
 		}
 	}
 
 	public function actionFull($id) {
 		return $this->render('full_task', [
-			'title' => 'Задание # ',
+			'title' => Yii::t('app', 'task_full_header'),
 			'task' => TasksCollection::getTask($id),
 		]);
 	}
@@ -60,7 +61,7 @@ class TaskController extends Controller {
 		}
 
 		return $this->render('task_create', [
-			'title' => 'Создание задания',
+			'title' => Yii::t('app', 'task_create_header'),
 			'arrUsers' => ArrayHelper::map(Users::find()->all(), 'id', 'name'),
 			'currentUser' => [Yii::$app->user->identity->id => Yii::$app->user->identity->name],
 			'arrPriority' => ArrayHelper::map(Priority::find()->all(), 'id', 'name'),
@@ -77,7 +78,7 @@ class TaskController extends Controller {
 		}
 
 		return $this->render('task_edit', [
-			'title' => 'Изменение задания',
+			'title' => Yii::t('app', 'task_edit_header'),
 			'task' => TasksCollection::getTask($id),
 			'arrUsers' => ArrayHelper::map(Users::find()->all(), 'id', 'name'),
 			'currentUser' => [Yii::$app->user->identity->id => Yii::$app->user->identity->name],

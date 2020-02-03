@@ -7,6 +7,7 @@ use app\models\tables\Priority;
 use app\models\tables\Status;
 use app\models\tables\Tasks;
 use app\models\tables\Users;
+use app\models\TasksCollection;
 use Yii;
 use yii\caching\DbDependency;
 use yii\filters\VerbFilter;
@@ -65,6 +66,7 @@ return date("Y-m-d");
 			'arrUsers' => $arrUsers,
 			'arrStatus' => $arrStatus,
 			'arrPriority' => $arrPriority,
+            'monthList' => TasksCollection::getMonthList()
 		]);
 	}
 

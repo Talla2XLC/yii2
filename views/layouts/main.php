@@ -38,32 +38,32 @@ NavBar::begin([
 echo Nav::widget([
 	'options' => ['class' => 'navbar-nav navbar-right'],
 	'items' => [
-		['label' => 'На главную', 'url' => ['/site/index']],
+		['label' => Yii::t('app', 'nav_main'), 'url' => ['/site/index']],
 		[
-			'label' => 'Task Tracker',
+			'label' => Yii::t('app', 'nav_tasks'),
 			'items' => [
-				['label' => 'Список задач', 'url' => ['task/index']],
-				['label' => 'Помощь', 'url' => ['/task/info']],
+				['label' => Yii::t('app', 'nav_tasks_list'), 'url' => ['task/index']],
+				['label' => Yii::t('app', 'nav_tasks_help'), 'url' => ['/task/info']],
 			],
 			'visible' => !Yii::$app->user->isGuest,
 		],
 		[
-			'label' => 'Администрирование',
+			'label' => Yii::t('app', 'nav_admin'),
 			'items' => [
-				['label' => 'Задачи', 'url' => ['/task-admin/']],
-				['label' => 'Пользователи', 'url' => ['/user-admin/']],
+				['label' => Yii::t('app', 'nav_admin_tasks'), 'url' => ['/task-admin/']],
+				['label' => Yii::t('app', 'nav_admin_users'), 'url' => ['/user-admin/']],
 			],
 			'visible' => !Yii::$app->user->isGuest,
 		],
-		['label' => 'About', 'url' => ['/site/about']],
+		['label' => Yii::t('app', 'nav_about'), 'url' => ['/site/about']],
 		/*['label' => 'Contact', 'url' => ['/site/contact']],*/
 		Yii::$app->user->isGuest ? (
-			['label' => 'Войти', 'url' => ['/site/login']]
+			['label' => Yii::t('app', 'nav_login'), 'url' => ['/site/login']]
 		) : (
 			'<li>'
 			. Html::beginForm(['/site/logout'], 'post')
 			. Html::submitButton(
-				'Logout (' . Yii::$app->user->identity->username . ')',
+				Yii::t('app', 'nav_logout').' (' . Yii::$app->user->identity->username . ')',
 				['class' => 'btn btn-link logout']
 			)
 			. Html::endForm()
@@ -71,10 +71,17 @@ echo Nav::widget([
 
 		),
 		[
-			'label' => 'Зарегистрироваться',
+			'label' => Yii::t('app', 'nav_register'),
 			'url' => ['/site/register'],
 			'visible' => Yii::$app->user->isGuest,
 		],
+        [
+            'label' => Yii::t('app', 'nav_lang') . ' ('. \Yii::$app->language . ')',
+            'items' => [
+                ['label' => Yii::t('app', 'nav_lang_en'), 'url' => ['/lang/en']],
+                ['label' => Yii::t('app', 'nav_lang_ru'), 'url' => ['/lang/ru']],
+            ]
+        ]
 	],
 
 ]);
