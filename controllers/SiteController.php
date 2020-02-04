@@ -155,4 +155,10 @@ class SiteController extends Controller {
 	public function actionAbout() {
 		return $this->render('about');
 	}
+
+    public function actionLang($lang = 'ru')
+    {
+        Yii::$app->session->set('lang', $lang);
+        $this->redirect(Yii::$app->request->referrer);
+    }
 }

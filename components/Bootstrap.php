@@ -12,9 +12,9 @@ use yii\base\Event;
 class Bootstrap extends Component implements BootstrapInterface {
 	public function bootstrap($app) {
 		$this->setTaskCreateListener();
-		Language::startSession();
+		$this->setLang();
 	}
-	public function setTaskCreateListener() {
+    protected function setTaskCreateListener() {
 		$handler = function (Event $event) {
 			$user = Users::findOne($event->sender->responsible_id);
 			$this->sendEmail($user);
@@ -22,7 +22,7 @@ class Bootstrap extends Component implements BootstrapInterface {
 		Event::on(TaskForm::class, TaskForm::EVENT_TASK_SUCCESSFULLY_SAVED, $handler);
 
 	}
-	public function sendEmail($user) {
+    protected function sendEmail($user) {
 		\Yii::$app->mailer->compose()
 			->setTo($user->email)
 			->setFrom([\Yii::$app->params['senderEmail'] => \Yii::$app->params['senderName']])
@@ -32,4 +32,9 @@ class Bootstrap extends Component implements BootstrapInterface {
 			->send();
 	}
 
+	protected function setLang(){
+	    if($lang = \Yii::$app->session->get('lang')){
+            \Yii::$app->language = $lang;
+        }
+    }
 }

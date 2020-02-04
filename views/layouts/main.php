@@ -78,8 +78,8 @@ echo Nav::widget([
         [
             'label' => Yii::t('app', 'nav_lang') . ' ('. \Yii::$app->language . ')',
             'items' => [
-                ['label' => Yii::t('app', 'nav_lang_en'), 'url' => ['/lang/en']],
-                ['label' => Yii::t('app', 'nav_lang_ru'), 'url' => ['/lang/ru']],
+                ['label' => Yii::t('app', 'nav_lang_en'), 'url' => ['/site/lang', 'lang' => 'en']],
+                ['label' => Yii::t('app', 'nav_lang_ru'), 'url' => ['/site/lang', 'lang' => 'ru']],
             ]
         ]
 	],
