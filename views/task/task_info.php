@@ -1,6 +1,6 @@
 <div class="title-top flex-row">
 	<h1><?=$title?></h1>
-	<a class="btn btn-lg btn-info" href="index.php?r=task">Назад</a>
+	<a class="btn btn-lg btn-info" href="index.php?r=task"><?=Yii::t('app', 'back_btn')?></a>
 </div>
 <div
 class="
@@ -11,28 +11,28 @@ class="
 ">
 	<div class="task-info flex-row">
 		<div class="task-info-tag flex-column jc-sa">
-			<p>Номер задания:</p>
-			<p>Приоритет:</p>
-			<p>Выполнить до:</p>
-			<p>Назначил:</p>
-			<p>Ответственный:</p>
-			<p>Статус:</p>
+            <p><?=Yii::t('app', 'task_number')?>:</p>
+            <p><?=Yii::t('app', 'task_priority')?>:</p>
+            <p><?=Yii::t('app', 'task_deadline')?>:</p>
+            <p><?=Yii::t('app', 'task_creator')?>:</p>
+            <p><?=Yii::t('app', 'task_responsible')?>:</p>
+            <p><?=Yii::t('app', 'task_status')?>:</p>
 		</div>
 
 		<div class="task-info-value help1 flex-column jc-sa">
-			<p><- Порядковый номер задачи</p>
-			<p><- Приоритетность задачи от Major - Middle - Minor</p>
-			<p><- Срок выполнения</p>
-			<p><- Пользователь, создавший задачу</p>
-			<p><- Исполнитель задачи</p>
-			<p><- Текущий статус: opened - in progress - closed - overdue</p>
+			<p><- <?=Yii::t('app', 'task_info_number')?></p>
+			<p><- <?=Yii::t('app', 'task_info_priority')?></p>
+			<p><- <?=Yii::t('app', 'task_info_deadline')?></p>
+			<p><- <?=Yii::t('app', 'task_info_creator')?></p>
+			<p><- <?=Yii::t('app', 'task_info_responsible')?></p>
+			<p><- <?=Yii::t('app', 'task_info_status')?></p>
 		</div>
 	</div>
 	<div class="task-desc help2 flex-column jc-sa">
-		<span>Название задания</span>
+		<span class="text-bold"><?=Yii::t('app', 'task_title')?></span>
 		<div class="task-desc-text flex-column ai-c fb-20">
-			<span>Описание: </span>
-			<p class="green center">Здесь располагается детальное описание задания</p>
+			<span><?=Yii::t('app', 'task_description')?>: </span>
+			<p class="green center"><?=Yii::t('app', 'task_info_description')?></p>
 		</div>
 	</div>
 </div>

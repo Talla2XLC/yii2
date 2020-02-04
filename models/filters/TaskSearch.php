@@ -71,7 +71,7 @@ class TaskSearch extends Tasks {
 
 	public function attributeLabels() {
 		return [
-			'deadline' => 'Сортировка по месяцу выполнения',
+			'deadline' => \Yii::t('app', 'deadline_attr'),
 		];
 	}
 }

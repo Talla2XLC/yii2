@@ -10,7 +10,9 @@ use app\models\TaskForm;
 use app\models\TasksCollection;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 class TaskController extends Controller {
 	public function actionIndex() {
@@ -24,7 +26,7 @@ class TaskController extends Controller {
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 		Yii::$app->db->cache(function () use ($dataProvider) {
-			$dataProvider->prepare();
+			return $dataProvider->prepare();
 		}, 3600);
 
 		if (!$model->validate()) {
@@ -32,18 +34,30 @@ class TaskController extends Controller {
 			print_r($error);exit;
 		} else {
 			return $this->render('index', [
-				'title' => 'All Available Tasks',
+				'title' => Yii::t('app', 'tasks_collection_header'),
 				'searchModel' => $searchModel,
 				'dataProvider' => $dataProvider,
+                'monthList' => TasksCollection::getMonthList()
 			]);
 		}
 	}
 
 	public function actionFull($id) {
+        $model = new TaskForm();
+
+        if($model->load(\Yii::$app->request->post())){
+            $model->img = UploadedFile::getInstance($model, 'img');
+            $model->saveImg();
+        }
+
+        $images=TasksCollection::getSmallImages($id);
+
 		return $this->render('full_task', [
-			'title' => 'Задание # ',
+			'title' => Yii::t('app', 'task_full_header'),
 			'task' => TasksCollection::getTask($id),
-		]);
+            'model' => $model,
+            'images' => $images
+        ]);
 	}
 
 	public function actionInfo() {
@@ -60,7 +74,7 @@ class TaskController extends Controller {
 		}
 
 		return $this->render('task_create', [
-			'title' => 'Создание задания',
+			'title' => Yii::t('app', 'task_create_header'),
 			'arrUsers' => ArrayHelper::map(Users::find()->all(), 'id', 'name'),
 			'currentUser' => [Yii::$app->user->identity->id => Yii::$app->user->identity->name],
 			'arrPriority' => ArrayHelper::map(Priority::find()->all(), 'id', 'name'),
@@ -73,17 +87,22 @@ class TaskController extends Controller {
 		$model = new TaskForm();
 
 		if ($model->load(Yii::$app->request->post()) && $model->editTask()) {
+            $model->img = UploadedFile::getInstance($model, 'img');
+            $model->saveImg();
 			return $this->redirect('index.php?r=task/index');
 		}
 
+        $images=TasksCollection::getSmallImages($id);
+
 		return $this->render('task_edit', [
-			'title' => 'Изменение задания',
+			'title' => Yii::t('app', 'task_edit_header'),
 			'task' => TasksCollection::getTask($id),
 			'arrUsers' => ArrayHelper::map(Users::find()->all(), 'id', 'name'),
 			'currentUser' => [Yii::$app->user->identity->id => Yii::$app->user->identity->name],
 			'arrPriority' => ArrayHelper::map(Priority::find()->all(), 'id', 'name'),
 			'arrStatus' => ArrayHelper::map(Status::find()->all(), 'id', 'name'),
 			'model' => $model,
+            'images' => $images
 		]);
 	}
 }

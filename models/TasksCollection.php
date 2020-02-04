@@ -5,8 +5,11 @@ use app\models\tables\Tasks;
 use app\models\validation\TaskValidator;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use Yii;
+use yii\helpers\FileHelper;
 
-class TasksCollection extends Model {
+class TasksCollection extends Model
+{
 	public $test;
 
 	public function rules() {
@@ -15,24 +18,37 @@ class TasksCollection extends Model {
 		];
 	}
 
-	public function getAllTasks() {
-		$allTasks = Tasks::find()->all();
-		return isset($allTasks) ? $allTasks : null;
-	}
-
 	public static function getTask($id) {
 		$task = Tasks::findOne(['id' => $id]);
 		return isset($task) ? $task : null;
 	}
 
-	public function getDataProvider() {
-		$query = Tasks::find()->where(['or',
-			['creator_id' => \Yii::$app->user->identity->id],
-			['responsible_id' => \Yii::$app->user->identity->id],
-		]);
+    public static function getMonthList() {
+        return [
+            '' => Yii::t('app', 'all'),
+            '1' => Yii::t('app', 'jan'),
+            '2' => Yii::t('app', 'feb'),
+            '3' => Yii::t('app', 'mar'),
+            '4' => Yii::t('app', 'apr'),
+            '5' => Yii::t('app', 'may'),
+            '6' => Yii::t('app', 'jun'),
+            '7' => Yii::t('app', 'jul'),
+            '8' => Yii::t('app', 'aug'),
+            '9' => Yii::t('app', 'sep'),
+            '10' => Yii::t('app', 'oct'),
+            '11' => Yii::t('app', 'nov'),
+            '12' => Yii::t('app', 'dec'),
+        ];
+    }
 
-		return $dataProvider = new ActiveDataProvider([
-			'query' => $query,
-		]);
-	}
+    public static function getSmallImages($id) {
+        $dirpath = \Yii::getAlias("@uploads/task_{$id}/");
+        $smallDirpath = \Yii::getAlias("@uploads/task_{$id}/small/");
+        FileHelper::createDirectory($dirpath);
+        FileHelper::createDirectory($smallDirpath);
+	    $path = FileHelper::normalizePath($smallDirpath);
+        $images=FileHelper::findFiles($path);
+
+        return $images;
+    }
 }

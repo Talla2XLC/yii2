@@ -28,7 +28,7 @@ class ContactFormTest extends \Codeception\Test\Unit
             'name' => 'Tester',
             'email' => 'tester@example.com',
             'subject' => 'very important letter subject',
-            'body' => 'body of current message',
+            'body' => 'body of current messages',
         ];
 
         expect_that($this->model->contact('admin@example.com'));
@@ -43,6 +43,6 @@ class ContactFormTest extends \Codeception\Test\Unit
         expect($emailMessage->getFrom())->hasKey('noreply@example.com');
         expect($emailMessage->getReplyTo())->hasKey('tester@example.com');
         expect($emailMessage->getSubject())->equals('very important letter subject');
-        expect($emailMessage->toString())->stringContainsString('body of current message');
+        expect($emailMessage->toString())->stringContainsString('body of current messages');
     }
 }

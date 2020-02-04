@@ -17,12 +17,12 @@
 	">
 		<div class="task-info flex-row">
 			<div class="task-info-tag flex-column">
-				<p>Номер задания:</p>
-				<p>Приоритет:</p>
-				<p>Выполнить до:</p>
-				<p>Назначил:</p>
-				<p>Ответственный:</p>
-				<p>Статус:</p>
+				<p><?=Yii::t('app', 'task_number')?>:</p>
+				<p><?=Yii::t('app', 'task_priority')?>:</p>
+				<p><?=Yii::t('app', 'task_deadline')?>:</p>
+				<p><?=Yii::t('app', 'task_creator')?>:</p>
+				<p><?=Yii::t('app', 'task_responsible')?>:</p>
+				<p><?=Yii::t('app', 'task_status')?>:</p>
 			</div>
 
 			<div class="task-info-value flex-column">
@@ -36,7 +36,7 @@
 		</div>
 		<div class="task-desc flex-column">
 			<span class="text-size1 text-bold"><?=$task->title?></span>
-			<span>Описание: </span>
+			<span><?=Yii::t('app', 'task_description')?>:</span>
 			<p><?=$task->description?></p>
 		</div>
 	</a>

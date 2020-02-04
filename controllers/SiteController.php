@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use app\components\Bootstrap;
 use app\models\ContactForm;
+use app\models\Language;
 use app\models\LoginForm;
 use app\models\RegisterForm;
 use Yii;
@@ -122,6 +124,8 @@ class SiteController extends Controller {
 	 */
 	public function actionLogout() {
 		Yii::$app->user->logout();
+        Language::startSession();
+        Language::setRuLang();
 
 		return $this->goHome();
 	}
@@ -151,4 +155,10 @@ class SiteController extends Controller {
 	public function actionAbout() {
 		return $this->render('about');
 	}
+
+    public function actionLang($lang = 'ru')
+    {
+        Yii::$app->session->set('lang', $lang);
+        $this->redirect(Yii::$app->request->referrer);
+    }
 }
