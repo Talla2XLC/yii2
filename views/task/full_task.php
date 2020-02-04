@@ -3,11 +3,12 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use app\widgets\TaskImagesWidget;
+use yii\helpers\Url;
 ?>
 
 <div class="title-top flex-row">
 	<h1><?=$title . $task->id?></h1>
-	<a class="btn btn-lg btn-info" href="index.php?r=task"><?=Yii::t('app', 'back_btn')?></a>
+	<a class="btn btn-lg btn-info" href="<?=Url::toRoute('task/index')?>"><?=Yii::t('app', 'back_btn')?></a>
 </div>
 <div
 class="
@@ -55,7 +56,7 @@ class="
     <?=TaskImagesWidget::widget(['task' => $task, 'images' => $images])?>
 </div>
 <div class="add-task-container flex-row jc-sa center">
-	<a class="btn btn-lg btn-primary" href="index.php?r=task/edit&id=<?=$task['id']?>"><?=Yii::t('app', 'task_edit_btn')?></a>
+	<a class="btn btn-lg btn-primary" href="<?=Url::toRoute(['task/edit', 'id' => $task->id])?>"><?=Yii::t('app', 'task_edit_btn')?></a>
     <?php $form = ActiveForm::begin([
         'id' => 'img-upload-form',
         'layout' => 'horizontal',

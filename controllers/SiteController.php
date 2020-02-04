@@ -124,8 +124,6 @@ class SiteController extends Controller {
 	 */
 	public function actionLogout() {
 		Yii::$app->user->logout();
-        Language::startSession();
-        Language::setRuLang();
 
 		return $this->goHome();
 	}

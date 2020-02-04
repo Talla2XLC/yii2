@@ -3,11 +3,12 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use app\widgets\TaskImagesWidget;
+use yii\helpers\Url;
 ?>
 
 <div class="title-top flex-row">
 	<h1><?=$title?></h1>
-	<a class="btn btn-lg btn-info" href="index.php?r=task"><?=Yii::t('app', 'back_btn')?></a>
+	<a class="btn btn-lg btn-info" href="<?=Url::toRoute('task/index')?>"><?=Yii::t('app', 'back_btn')?></a>
 </div>
 <?php $form = ActiveForm::begin([
 	'id' => 'new-task-form',
