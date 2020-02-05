@@ -68,7 +68,6 @@ $config = [
             'rules' => [
                 'tasks' => 'task/index',
                 'task/<id\d+>' => 'task/full',
-                'images' => '@uploads',
                 '' => 'site/index',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
