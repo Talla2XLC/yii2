@@ -3,6 +3,7 @@ use app\widgets\TaskWidget;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\ListView;
+use yii\helpers\Url;
 ?>
 
 <h1><?=$title?></h1>
@@ -31,5 +32,5 @@ use yii\widgets\ListView;
 	'summary' => false,
 ])?>
 <div class="add-task-container flex-row jc-c center">
-	<a class="btn btn-lg btn-primary" href="index.php?r=task/create"><?=Yii::t('app', 'task_create_btn')?></a>
+	<a class="btn btn-lg btn-primary" href="<?=Url::toRoute('task/create')?>"><?=Yii::t('app', 'task_create_btn')?></a>
 </div>
