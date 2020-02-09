@@ -3,11 +3,12 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use app\widgets\TaskImagesWidget;
+use yii\helpers\Url;
 ?>
 
 <div class="title-top flex-row">
 	<h1><?=$title?></h1>
-	<a class="btn btn-lg btn-info" href="index.php?r=task"><?=Yii::t('app', 'back_btn')?></a>
+	<a class="btn btn-lg btn-info" href="<?=Url::toRoute('task/index')?>"><?=Yii::t('app', 'back_btn')?></a>
 </div>
 <?php $form = ActiveForm::begin([
 	'id' => 'new-task-form',
@@ -53,7 +54,16 @@ class="
 	$arrPriority,
 	['autofocus' => true, 'value' => $task->priority_id]
 )?>
-			<?=$form->field($model, 'deadline')->textInput(['value' => date_format(date_create($task->deadline), 'd.m.Y')])?>
+			<?=$form->field($model, 'deadline')
+                ->widget(\yii\jui\DatePicker::class, [
+                    'dateFormat' => 'dd.MM.yyyy',
+                    'options' => [
+                        'placeholder' => Yii::$app->formatter->asDate($task->deadline, 'd.MM.Y'),
+                        'class'=> 'form-control',
+                        'autocomplete' => 'off'
+                    ]
+                ])
+            ?>
 			<?=$form->field($model, 'creator_id')->dropdownList(
 	[$task->creator->id => $task->creator->name],
 	['value' => $task->creator_id, 'type' => 'number']
@@ -76,6 +86,8 @@ class="
 		</div>
 	</div>
 </div>
+
+<?php if (Yii::$app->user->can('TaskDelete')): ?>
 <?=TaskImagesWidget::widget(['task' => $task, 'images' => $images])?>
 
 <div class="form-group">
@@ -84,6 +96,7 @@ class="
         <?=Html::submitButton(Yii::t('app', 'task_edit_commit_btn'), ['class' => 'btn btn-lg btn-success', 'name' => 'register-button'])?>
     </div>
 </div>
+<?php endif;?>
 
 <?php ActiveForm::end();?>
 

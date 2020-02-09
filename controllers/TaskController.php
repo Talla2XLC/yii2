@@ -9,12 +9,36 @@ use app\models\tables\Users;
 use app\models\TaskForm;
 use app\models\TasksCollection;
 use Yii;
+use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
 class TaskController extends Controller {
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['edit', 'create'],
+                'rules' => [
+                    [
+                        'actions' => ['edit'],
+                        'allow' => true,
+                        'roles' => ['TaskUpdate']
+                    ],
+                    [
+                        'actions' => ['create'],
+                        'allow' => true,
+                        'roles' => ['TaskCreate']
+                    ]
+                ]
+            ]
+        ];
+    }
+
 	public function actionIndex() {
 		$model = new TasksCollection();
 

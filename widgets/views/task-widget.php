@@ -1,5 +1,9 @@
+<?php
+use yii\helpers\Url;
+?>
+
 <a
-	href="index.php?r=task/full&id=<?=$task['id']?>"
+	href="<?=Url::toRoute(['task/full', 'id' => $task->id])?>"
 	class="
 		task-container
 		flex-row
