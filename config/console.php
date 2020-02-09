@@ -26,6 +26,13 @@ $config = [
             ],
         ],
         'db' => $db,
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => true,
+        ],
+        'authManager' => [
+            'class' => \yii\rbac\DbManager::class,
+        ],
     ],
     'params' => $params,
     /*

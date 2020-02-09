@@ -11,6 +11,7 @@ use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
 AppAsset::register($this);
+\app\assets\CalendarAsset::register($this);
 ?>
 <?php $this->beginPage()?>
 <!DOCTYPE html>
